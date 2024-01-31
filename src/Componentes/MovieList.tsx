@@ -6,7 +6,7 @@ function MovieList() {
 
   const getMovies = () => {
     const url =
-      "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
+      "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=878";
     const options = {
       method: "GET",
       headers: {
@@ -44,16 +44,14 @@ function MovieList() {
 
   return (
     <section className="movie-list-container">
-      <ul>
         {movies.map((film) => (
           <MovieCard
             key={film.id}
             imageURL={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
-            title={film.original_title}
+            title={film.title}
             movieYear={film.release_date}
           />
         ))}
-      </ul>
     </section>
   );
 }

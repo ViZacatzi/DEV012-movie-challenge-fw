@@ -6,14 +6,26 @@
 
 #root {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
   height: 100%;
 }
 
+.movie-list-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .movie-title {
   color:#66FCF1;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 75px;
+  margin: 25px;
 }
 
 img {
@@ -41,25 +53,26 @@ img:hover {
   border-radius: 10px;
   text-align: center;  
   margin: 5px;
-  
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: medium;
+  margin-bottom: 10px;
 }
 
 .movie-card {
 background-color: #66FCF1;
-border-top-left-radius: 20px;
-border-top-right-radius: 20px;
+border-radius: 25px;
 color: #1c2531;
 text-align: center; 
 justify-content: center;
-margin: 15px;
+margin: 20px;
 width: 240px;
-height: 340px;
+height: 420px;
 transition: all 0.3s;
 
 }
 
 .movie-card:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   box-shadow: 0 0 15px #66FCF1;
 }
 
@@ -67,20 +80,19 @@ h5 {
   background-color: #66FCF1;
   font-size: large;
   font-weight:bolder;
-  padding: 0;
+  padding-left: 15px;
+  padding-right: 15px;
   margin: 0;
-}
-
-h5:hover {
-  box-shadow: 0 0 15px #66FCF1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 p {
   background-color: #66FCF1;
   padding: 0;
   margin: 0;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
-p:hover {
-  box-shadow: 0 0 15px #66FCF1;
-}
