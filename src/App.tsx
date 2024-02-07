@@ -12,12 +12,6 @@ function App() {
       <h1 className="movie-title">SCI-FI MOVIES</h1>
       <>
         <>
-          <SortBy />
-        </>
-        <>
-          <Filter />
-        </>
-        <>
           <MovieList
           />
         </>

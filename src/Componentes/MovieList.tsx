@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
-import MovieCard, { MovieProps } from "./MovieCard.tsx";
+import MovieCard from "./MovieCard.tsx";
+import Filter from "./Filter.tsx";
+import SortBy from "./SortBy.tsx";
 
 function MovieList() {
   const [movies, setMovies] = useState([]);
+  const [genre, setGenre] = useState(null);
+  const [sortBy, setSortBy] = useState("popularity.desc");
 
   const getMovies = () => {
     const url =
-      "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=878";
+    `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&without_genres=35,80,99,18,10751,36,10402,10749,10770,37&primary_release_date.gte=2020-01-01&primary_release_date.lte=2020-12-31&page=1&sort_by=${sortBy}&${genre ? `with_genres=${genre}` : ''}`;
+    
     const options = {
       method: "GET",
       headers: {
@@ -33,17 +38,35 @@ function MovieList() {
 
   useEffect(() => {
     getAllMovies();
-  }, []);
+  }, [genre, sortBy]);
 
   const getAllMovies = () => {
     getMovies().then((movies) => {
+      const filteredMovies = movies.filter(movie =>{
+        return true;
+      });
       console.log("Array de películas:", movies);
-      setMovies(movies);
+      setMovies(filteredMovies);
     });
   };
 
+  // Función para manejar el cambio de género
+  const handleGenreChange = (selectedGenre) => {
+    setGenre(selectedGenre);
+  };
+
+  // Función para manejar el cambio de orden de clasificación
+  const handleSortByChange = (selectedSortBy) => {
+    setSortBy(selectedSortBy);
+  };
+
   return (
-    <section className="movie-list-container">
+    <section className="movie">
+      <div className="div-filtros">
+        <Filter onGenreChange={handleGenreChange} />
+        <SortBy onSortByChange={handleSortByChange} />
+      </div>
+      <div className="movie-list-container">
         {movies.map((film) => (
           <MovieCard
             key={film.id}
@@ -52,6 +75,7 @@ function MovieList() {
             movieYear={film.release_date}
           />
         ))}
+      </div>
     </section>
   );
 }

@@ -1,16 +1,18 @@
 
 
-function Filter ({gender}: gender){
+function Filter ({ onGenreChange }) {
+    const handleGenreChange = (event) => {
+      const selectedGenre = event.target.value;
+      onGenreChange(selectedGenre);
+    };
     return (
-        <div className="sort-by-gender">
-            <select className="selection">
-              <option value="seleccion">FILTRAR POR GENERO:</option>
-              <option value="Accion">ACCIÓN</option>
-              <option value="Ciencia-Ficción">CIENCIA FICCIÓN</option>
-              <option value="Comedia">COMEDIA</option>
-              <option value="Drama">DRAMA</option>
-              <option value="Suspenso">SUSPENSO</option>
-              <option value="Terror">TERROR</option>
+        <div className="filter-by-gender">
+            <select className="selection" onChange={handleGenreChange}>
+              <option value=" ">FILTRAR POR GENERO:</option>
+              <option value="28">ACCIÓN</option>
+              <option value="16">ANIMACIÓN</option>
+              <option value="12">AVENTURA</option>
+              <option value="53">SUSPENSO</option>
             </select>
         </div>
     )
