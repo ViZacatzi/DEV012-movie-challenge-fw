@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import MovieCard from "./MovieCard.tsx";
-import Filter from "./Filter.tsx";
-import SortBy from "./SortBy.tsx";
+import { useEffect, useState } from "react";
+import MovieCard from "../Componentes/MovieCard.tsx";
+import Filter from "../Componentes/Filter.tsx";
+import SortBy from "../Componentes/SortBy.tsx";
+import { useNavigate } from "react-router-dom";
 
-function MovieList() {
+function MovieHome() {
   const [movies, setMovies] = useState([]);
   const [genre, setGenre] = useState(null);
   const [sortBy, setSortBy] = useState("popularity.desc");
+  const navigate = useNavigate();
 
   const getMovies = () => {
     const url =
@@ -60,8 +62,15 @@ function MovieList() {
     setSortBy(selectedSortBy);
   };
 
+  //Función para manejar el click en las targetas
+  const handleMovieClick = (film) =>{
+    navigate (`/movie-detail/${film.id}`)
+    console.log (film.id)
+  }
+
   return (
     <section className="movie">
+      <h1 className="movie-title">SCI-FI MOVIES</h1>
       <div className="div-filtros">
         <Filter onGenreChange={handleGenreChange} />
         <SortBy onSortByChange={handleSortByChange} />
@@ -69,6 +78,7 @@ function MovieList() {
       <div className="movie-list-container">
         {movies.map((film) => (
           <MovieCard
+            onClick={ () => handleMovieClick (film)}
             key={film.id}
             imageURL={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
             title={film.title}
@@ -80,4 +90,4 @@ function MovieList() {
   );
 }
 
-export default MovieList;
+export default MovieHome;

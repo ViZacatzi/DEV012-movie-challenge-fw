@@ -1,21 +1,19 @@
-import { useEffect, useState } from "react";
-import SortBy from "./Componentes/SortBy.tsx";
-import Filter from "./Componentes/Filter.tsx";
-import MovieCard from "./Componentes/MovieCard.tsx";
 import "./App.css";
-import MovieList from "./Componentes/MovieList.tsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import  MovieDetail  from "./Paginas/MovieDetail.tsx";
+import  Error  from "./Paginas/Error.tsx"
+import MovieHome from "./Paginas/MovieHome.tsx";
 
 function App() {
-  
   return (
     <>
-      <h1 className="movie-title">SCI-FI MOVIES</h1>
-      <>
-        <>
-          <MovieList
-          />
-        </>
-      </>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MovieHome />} />
+          <Route path="/movie-detail/:id" element={<MovieDetail />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
