@@ -52,7 +52,7 @@ img:hover {
   display: flex;
   margin: 19px;
   text-align: center; 
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .selection {
@@ -64,6 +64,7 @@ img:hover {
   margin: 5px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: medium;
+  font-weight: bold;
   margin-bottom: 10px;
   transition: all 0.3s;
 }
@@ -108,6 +109,49 @@ p {
   margin: 0;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+
+.pagination {
+  background-color: #1c2531;
+  color: #66FCF1;
+  text-align: center; 
+  margin: 20px;
+  justify-content: space-evenly;
+}
+
+.pagination-previous {
+  background-color: #1c2531;
+  color: #66FCF1;
+  font-size: 16px;
+  font-weight: bold;
+}
+.pagination-previous:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #66FCF1;
+}
+
+.pagination-next {
+  position: absolute;
+  background-color: #1c2531;
+  color: #66FCF1;
+  font-size: 16px;
+  font-weight: bold;
+}
+.pagination-next:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #66FCF1;
+}
+
+.pagination-number {
+  position: absolute;
+  background-color: #1c2531;
+  color: #66FCF1;
+  font-size: 16px;
+  font-weight: bold;
+}
+.pagination-number:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #66FCF1;
 }
 
 .movie-error {
@@ -164,7 +208,7 @@ justify-content: center;
 
 .button-movie-detail {
   position: absolute;
-  margin-top: 650px;
+  margin-top: 655px;
   margin-left: 260px;
   background-color: #1c2531;
   color: #66FCF1;

@@ -3,16 +3,22 @@ import MovieCard from "../Componentes/MovieCard.tsx";
 import Filter from "../Componentes/Filter.tsx";
 import SortBy from "../Componentes/SortBy.tsx";
 import { useNavigate } from "react-router-dom";
+import Pagination from "../Componentes/Pagination.tsx";
 
 function MovieHome() {
   const [movies, setMovies] = useState([]);
+
   const [genre, setGenre] = useState(null);
   const [sortBy, setSortBy] = useState("popularity.desc");
+
   const navigate = useNavigate();
+
+  const [currentPage, setCurrentPage] = useState (1);
+  
 
   const getMovies = () => {
     const url =
-    `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&without_genres=35,80,99,18,10751,36,10402,10749,10770,37&primary_release_date.gte=2020-01-01&primary_release_date.lte=2020-12-31&page=1&sort_by=${sortBy}&${genre ? `with_genres=${genre}` : ''}`;
+    `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&without_genres=35,80,99,18,10751,36,10402,10749,10770,37&primary_release_date.gte=2020-01-01&primary_release_date.lte=2020-12-31&page=${currentPage}&sort_by=${sortBy}&${genre ? `with_genres=${genre}` : ''}`;
     
     const options = {
       method: "GET",
@@ -30,7 +36,7 @@ function MovieHome() {
         }
         return res.json();
       })
-      .then((data) => data.results)
+      .then((data) => data)
       .catch((err) => {
         console.error("Error fetching movies:", err);
         // Puedes lanzar el error nuevamente si lo deseas
@@ -40,15 +46,11 @@ function MovieHome() {
 
   useEffect(() => {
     getAllMovies();
-  }, [genre, sortBy]);
+  }, [genre, sortBy, currentPage]);
 
   const getAllMovies = () => {
-    getMovies().then((movies) => {
-      const filteredMovies = movies.filter(movie =>{
-        return true;
-      });
-      console.log("Array de películas:", movies);
-      setMovies(filteredMovies);
+    getMovies().then((data) => {
+      setMovies(data.results);
     });
   };
 
@@ -68,6 +70,12 @@ function MovieHome() {
     console.log (film.id)
   }
 
+
+  //función para la paginación
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <section className="movie">
       <h1 className="movie-title">SCI-FI MOVIES</h1>
@@ -86,6 +94,11 @@ function MovieHome() {
           />
         ))}
       </div>
+      <Pagination 
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage} totalPages={undefined}      />
+      
     </section>
   );
 }
