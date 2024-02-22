@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
-import MovieCard from "../Componentes/MovieCard";
 import { useParams, useNavigate } from "react-router-dom";
 
-
 function MovieDetail() {
-
   const navigate = useNavigate();
   const { id } = useParams();
-  const [movie, setMovie] = useState ();
+  const [movie, setMovie] = useState();
 
   const getMovie = () => {
-    const url = `https://api.themoviedb.org/3/movie/${id}`    
+    const url = `https://api.themoviedb.org/3/movie/${id}`;
     const options = {
       method: "GET",
       headers: {
@@ -37,36 +34,37 @@ function MovieDetail() {
 
   useEffect(() => {
     getMovie().then((data) => setMovie(data));
-  },[]);
-
+  }, []);
 
   function handleGoBack() {
-    navigate (-1)
+    navigate(-1);
   }
 
   return (
     <section>
       <div className="movie-detail-container">
-      <button className="button-movie-detail" onClick={handleGoBack}>◁◁◁ BACK TO MOVE LIST</button>
-      {movie && (
-        <>
-          <img className="img-movie-detail"
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-          />
-          <div className="detail-container">
-          <h2 className="movie-title-detail">{movie.title}</h2>
-          <p className="movie-detail">RELASE DATE:{movie.release_date}</p>
-          <p className="movie-detail">{movie.overview}</p>
-          <p className="movie-detail">VOTES {movie.vote_average}</p>
-          </div>
-        </>
-      )}
-    </div>
+        <button className="button-movie-detail" onClick={handleGoBack}>
+          ◁◁◁ BACK TO MOVE LIST
+        </button>
+        {movie && (
+          <>
+            <img
+              className="img-movie-detail"
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <div className="detail-container">
+              <h2 className="movie-title-detail">{movie.title}</h2>
+              <p className="movie-detail">RELASE DATE:{movie.release_date}</p>
+              <p className="movie-detail">GENRES:{movie.genre_ids}</p>
+              <p className="movie-detail">{movie.overview}</p>
+              <p className="movie-detail">VOTES: {movie.vote_average}</p>
+              <p className="movie-detail">VOTES COUNT: {movie.vote_count}</p>
 
-    
-   
-
+            </div>
+          </>
+        )}
+      </div>
     </section>
   );
 }

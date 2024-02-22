@@ -67,7 +67,6 @@ function MovieHome() {
   //Función para manejar el click en las targetas
   const handleMovieClick = (film) =>{
     navigate (`/movie-detail/${film.id}`)
-    console.log (film.id)
   }
 
 
